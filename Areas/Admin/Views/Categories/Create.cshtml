@@ -1,0 +1,52 @@
+﻿@model CategoryCreateViewModel
+
+<div class="row col-sm-6">
+    <div class="col-sm-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"> Create category</h4>
+                <form class="forms-sample" method="post" asp-action="Create" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name">Name</label>
+                        <input asp-for="Name" class="form-control" placeholder="Name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IsMain">Is main</label>
+                        <input asp-for="IsMain" placeholder="Is main" id="isMain">
+                        <span asp-validation-for="IsMain" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none" id="imageDiv">
+                        <label asp-for="Image">Choose image</label>
+                        <input asp-for="Image" class="form-control" placeholder="Sekil secin" accept="image/*">
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group" id="parentDiv">
+                        <label asp-for="ParentId">Parent categories</label>
+                        <select asp-for="ParentId" asp-items="Model.ParentCategories" class="form-control" placeholder="Parent kateqori secin"></select>
+                        <span asp-validation-for="ParentId" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light" asp-action="Index">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('#isMain').change(function () {
+            if ($(this).is(":checked")) {
+                $("#imageDiv").removeClass("d-none");
+                $("#parentDiv").addClass("d-none");
+            }
+            else {
+                $("#imageDiv").addClass("d-none");
+                $("#parentDiv").removeClass("d-none");
+            }
+        });
+    </script>
+}

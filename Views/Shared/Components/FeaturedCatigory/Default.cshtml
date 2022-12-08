@@ -1,0 +1,29 @@
+﻿@model List<Category>
+
+@{
+    int count = Model.Count;
+}
+<div class="row category-active">
+    @for (int i = 0; i < count; i += 2)
+    {
+            <div class="col-lg-2">
+                <div class="single-category text-center">
+                    <a asp-controller="shop" asp-action="index" asp-route-categoryId="@Model[i].Id">
+                        <img src="~/assets/images/category/@Model[i].ImageUrl" alt="category">
+                        <p>@Model[i].Name</p>
+                    </a>
+                </div> 
+
+            @if (Model.Count > i + 1)
+            {
+                    <div class="single-category text-center">
+                    <a asp-controller="shop" asp-action="index" asp-route-categoryId="@Model[i + 1].Id">
+                            <img src="~/assets/images/category/@Model[i+1].ImageUrl" alt="category">
+                            <p>@Model[i+1].Name</p>
+                        </a>
+                    </div> 
+            }
+
+            </div>
+    }   
+</div>
